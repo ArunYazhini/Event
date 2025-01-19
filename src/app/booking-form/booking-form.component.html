@@ -1,0 +1,129 @@
+<mat-horizontal-stepper [linear]="true" labelPosition="bottom">
+  <!-- Step 1: Select Services -->
+  <mat-step [stepControl]="serviceFormGroup">
+    <h3>Select Services</h3>
+    <div class="service-grid">
+      <div class="service-column">
+        <mat-checkbox 
+          *ngFor="let service of services.slice(0, 6)" 
+          (change)="onServiceSelect($event, service)">
+          {{ service }}
+        </mat-checkbox>
+      </div>
+      <div class="service-column">
+        <mat-checkbox 
+          *ngFor="let service of services.slice(6, 12)" 
+          (change)="onServiceSelect($event, service)">
+          {{ service }}
+        </mat-checkbox>
+      </div>
+    </div>
+    <div class="button-container">
+    <button class="main-btn" matStepperNext>Next</button>
+    </div>
+  </mat-step>
+
+  <!-- Step 2: Choose Designs (Conditional) -->
+  <mat-step [stepControl]="serviceFormGroup" *ngIf="showDesignStep">
+    <h3>Choose Design</h3>
+    <ng-container *ngFor="let service of selectedServices">
+      <ng-container *ngIf="isDesignService(service)">
+        <h4>{{ service }}</h4>
+        <mat-radio-group (change)="onDesignSelect(service, $event.value)">
+          <mat-radio-button *ngFor="let design of getDesigns(service)" [value]="design">
+            <img [src]="design" alt="Design" width="100px">
+          </mat-radio-button>
+        </mat-radio-group>
+      </ng-container>
+    </ng-container>
+    <div class="button-container">
+      <button class="main-btn" matStepperPrevious>Back</button>
+      <button class="main-btn" matStepperNext>Next</button>
+    </div>
+    
+  </mat-step>
+
+  <!-- Step 3: Contact Details -->
+  <mat-step [stepControl]="contactFormGroup">
+    <h3>Contact Details</h3>
+    <form [formGroup]="contactFormGroup" class="contact-form">
+      <mat-form-field class="form-item">
+        <input matInput placeholder="Name" formControlName="name">
+        <mat-error *ngIf="contactFormGroup.get('name')?.hasError('required')">
+          Name is required.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-item">
+        <input matInput placeholder="Email" formControlName="email">
+        <mat-error *ngIf="contactFormGroup.get('email')?.hasError('required')">
+          Email is required.
+        </mat-error>
+        <mat-error *ngIf="contactFormGroup.get('email')?.hasError('email')">
+          Please enter a valid email.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-item">
+        <input matInput placeholder="Phone No" formControlName="phone">
+        <mat-error *ngIf="contactFormGroup.get('phone')?.hasError('required')">
+          Phone number is required.
+        </mat-error>
+        <mat-error *ngIf="contactFormGroup.get('phone')?.hasError('pattern')">
+          Please enter a valid 10-digit phone number.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-item">
+        <input matInput placeholder="Address" formControlName="address">
+        <mat-error *ngIf="contactFormGroup.get('address')?.hasError('required')">
+          Address is required.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-item">
+        <input matInput placeholder="City" formControlName="city">
+        <mat-error *ngIf="contactFormGroup.get('city')?.hasError('required')">
+          City is required.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-item">
+        <input matInput placeholder="District" formControlName="district">
+        <mat-error *ngIf="contactFormGroup.get('district')?.hasError('required')">
+          District is required.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-item">
+        <input matInput placeholder="PinCode" formControlName="pincode">
+        <mat-error *ngIf="contactFormGroup.get('pincode')?.hasError('required')">
+          PinCode is required.
+        </mat-error>
+        <mat-error *ngIf="contactFormGroup.get('pincode')?.hasError('pattern')">
+          Please enter a valid 6-digit PinCode.
+        </mat-error>
+      </mat-form-field>
+      
+  
+      <mat-form-field>
+        <mat-label>Date of Event</mat-label>
+        <input matInput [matDatepicker]="eventDatePicker" formControlName="eventDate">
+        <mat-datepicker-toggle matSuffix [for]="eventDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #eventDatePicker></mat-datepicker>
+        <mat-error *ngIf="contactFormGroup.get('eventDate')?.hasError('required')">
+          Event date is required.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-item">
+        <textarea matInput placeholder="Additional Notes" formControlName="notes"></textarea>
+      </mat-form-field>
+    </form>
+    <div class="button-container">
+      <button class="main-btn" matStepperPrevious>Back</button>
+      <button class="main-btn" [disabled]="contactFormGroup.invalid" (click)="submit()">Submit</button>
+    </div>
+  </mat-step>
+  
+</mat-horizontal-stepper>

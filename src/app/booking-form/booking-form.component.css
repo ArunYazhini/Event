@@ -1,0 +1,114 @@
+.service-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Space between the two columns */
+}
+
+.service-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between checkboxes in a column */
+}
+
+.service-column mat-checkbox {
+  font-size: 16px;
+  color: #333;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between form fields */
+}
+
+.form-item {
+  width: 100%;
+}
+
+mat-step {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-step h3 {
+  margin-bottom: 20px;
+}
+
+mat-radio-group {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Space between the buttons */
+  margin-top: 20px; /* Optional: Add space above the buttons */
+}
+
+
+.main-btn:hover {
+  background-color: #e43a4d;
+}
+
+/* Custom Stepper Active, Inactive, and Completed Colors */
+::ng-deep .mat-step-header {
+  background-color: transparent; /* Remove default background */
+}
+
+::ng-deep .mat-step-header .mat-step-icon {
+  background-color: #fe4a5d; /* Inactive steps background */
+  color: black; /* Inactive steps icon color */
+  border-radius: 50%;
+}
+
+::ng-deep .mat-step-header .mat-step-icon.mat-active {
+  background-color: #fe4a5d; /* Active step background */
+  color: white; /* Active step icon color */
+}
+
+::ng-deep .mat-step-header .mat-step-icon.mat-completed {
+  background-color: #fe4a5d; /* Completed steps background */
+  color: white; /* Completed steps icon color */
+}
+
+/* Custom Checkbox Tick Colors */
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: #F2E2D2 !important; /* Background color for the checked state */
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-checkmark-path {
+  stroke: black !important; /* Tick color */
+}
+
+::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #F2E2D2 !important; /* Background color for indeterminate state */
+}
+
+::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-checkmark-path {
+  stroke: black !important; /* Tick color for indeterminate state */
+}
+
+/* Optional: Unchecked state outline color */
+::ng-deep .mat-checkbox-frame {
+  border-color: #F2E2D2 !important; /* Border color for the unchecked state */
+}
+
+/* Optional: Hover effect for the checkbox */
+::ng-deep .mat-checkbox:hover .mat-checkbox-frame {
+  border-color: #fe4a5d !important; /* Border color on hover */
+}
+
+
+/* Optional: Adjust Stepper Header Text Colors */
+::ng-deep .mat-step-label {
+  color: black; /* Text color for step headers */
+}
+
+::ng-deep .mat-step-label.mat-active {
+  color: #fe4a5d; /* Active step text color */
+}
+.ng-invalid.mat-form-field {
+  border: 1px solid red;
+}
